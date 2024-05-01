@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>File Upload</title>
+</head>
+<body>
+<h1>File Upload</h1>
+
+<!-- File Upload Form -->
+<form th:action="@{/uploadFile}" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" />
+    <input type="submit" value="Upload" />
+</form>
+
+<!-- Display upload status -->
+<div th:if="${message}">
+    <p th:text="${message}"></p>
+</div>
+
+<!-- Display JSON content -->
+<div th:if="${jsonContent}">
+    <h2>JSON Content:</h2>
+    <pre th:text="${jsonContent}"></pre>
+</div>
+</body>
+</html>
