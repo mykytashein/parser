@@ -14,6 +14,9 @@
     <input type="submit" value="Login">
 </form>
 
-<p>Don't have an account? <a th:href="@{/signup}">Sign up</a></p>
+<form th:action="@{/signup}" method="get">
+    <label>Don't have an account?</label>
+    <input type="submit" value="Sign up">
+</form>
 </body>
 </html>

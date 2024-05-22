@@ -17,7 +17,7 @@ public class SignUpController {
     private BCryptPasswordEncoder passwordEncoder;
 
     @GetMapping("/signup")
-    public String signUpForm() {
+    public String signup() {
         return "signup";
     }
 
