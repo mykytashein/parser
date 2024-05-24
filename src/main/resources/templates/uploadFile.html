@@ -1,26 +1,54 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>File Upload</title>
-</head>
-<body>
-<h1>File Upload</h1>
+    <head th:replace="layout_navigation :: head"></head>
+    <body>
+        <div th:replace="layout_navigation :: nav"></div>
+        <div th:fragment="content">
+            <h1>File Upload</h1>
 
-<!-- File Upload Form -->
-<form th:action="@{/uploadFile}" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" />
-    <input type="submit" value="Upload" />
-</form>
+            <!-- File Upload Form -->
+            <form th:action="@{/uploadFile}" method="post" enctype="multipart/form-data">
+                <input class="form-control" type="file" name="file"/>
+                <input type="submit" class="" value="Upload" />
+            </form>
 
-<!-- Display upload status -->
-<div th:if="${message}">
-    <p th:text="${message}"></p>
-</div>
+            <!-- Display upload status -->
+            <div th:if="${message}">
+                <p th:text="${message}"></p>
+            </div>
 
-<!-- Display JSON content -->
-<div th:if="${jsonContent}">
-    <h2>JSON Content:</h2>
-    <pre th:text="${jsonContent}"></pre>
-</div>
-</body>
+            <!-- Display JSON content -->
+            <div th:if="${jsonContent}">
+                <h2>JSON Content:</h2>
+                <pre th:text="${jsonContent}"></pre>
+            </div>
+            <!--<div id="data"></div>-->
+            <div class="table-responsive">
+                <table id="data" class="table">
+                    <tr th:each="entry : ${jsonContent}">
+                        <td contenteditable="true" th:text="${entry.key}"></td>
+                        <td contenteditable="true" th:text="${entry.value}"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </body>
 </html>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        /*<![CDATA[*/
+        var data = /*[[${jsonContent}]]*/ 'default';
+        var html = '<table>';
+        $.each(data, function(key, value){
+            html += '<tr>';
+            html += '<td contenteditable="true">' + key + '</td>';
+            html += '<td contenteditable="true">' + value + '</td>';
+            html += '</tr>';
+        });
+        html += '</table>';
+        $('#data').html(html);
+    });
+</script>
