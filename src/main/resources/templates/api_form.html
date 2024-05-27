@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="layout_navigation :: head"></head>
+<body>
+<div th:replace="layout_navigation :: nav"></div>
+<h1>API Tester</h1>
+<form action="#" th:action="@{/test-api}" th:object="${apiRequest}" method="post">
+  <div>
+    <label for="url">API URL:</label>
+    <input type="text" id="url" name="url" th:field="*{url}" required />
+  </div>
+  <div>
+    <label for="host">Host Header (optional):</label>
+    <input type="text" id="host" name="host" th:field="*{host}" />
+  </div>
+  <div>
+    <label for="key">API Key Header (optional):</label>
+    <input type="text" id="key" name="key" th:field="*{key}" />
+  </div>
+  <button type="submit">Test API</button>
+</form>
+
+<div th:if="${response}">
+  <h2>API Response</h2>
+  <pre th:text="${response}"></pre>
+</div>
+</body>
+</html>

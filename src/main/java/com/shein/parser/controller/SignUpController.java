@@ -1,5 +1,7 @@
-package com.shein.parser;
+package com.shein.parser.controller;
 
+import com.shein.parser.model.User;
+import com.shein.parser.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;

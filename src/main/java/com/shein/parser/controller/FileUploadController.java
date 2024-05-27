@@ -1,4 +1,4 @@
-package com.shein.parser;
+package com.shein.parser.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;

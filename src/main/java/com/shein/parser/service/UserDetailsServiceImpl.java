@@ -1,5 +1,7 @@
-package com.shein.parser;
+package com.shein.parser.service;
 
+import com.shein.parser.model.User;
+import com.shein.parser.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,4 +1,4 @@
-package com.shein.parser;
+package com.shein.parser.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

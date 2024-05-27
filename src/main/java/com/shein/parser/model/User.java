@@ -1,4 +1,4 @@
-package com.shein.parser;
+package com.shein.parser.model;
 
 import jakarta.persistence.*;
 
