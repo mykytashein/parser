@@ -47,17 +47,14 @@ public class ApiController {
 
             String response = request.retrieve().bodyToMono(String.class).block();
 
-            // Parse the API response
             JSONObject jsonResponse = new JSONObject(response);
 
-            // Add the parsed data to the model
             model.addAttribute("jsonResponse", jsonResponse.toString(4)); // Optionally, you can format the JSON for better readability
 
             String flatJson = JsonFlattener.flatten(jsonResponse.toString());
             ObjectMapper objectMapper = new ObjectMapper();
             Map<String, Object> flatJsonMap = objectMapper.readValue(flatJson, Map.class);
 
-            // Split the keys and create a new map for each part
             List<List<String>> tableData = new ArrayList<>();
             for (Map.Entry<String, Object> entry : flatJsonMap.entrySet()) {
                 List<String> row = new ArrayList<>(Arrays.asList(entry.getKey().split("\\.")));
@@ -65,7 +62,6 @@ public class ApiController {
                 row.add(value);
                 tableData.add(row);
             }
-            // Add the parsed data to the model
             model.addAttribute("tableData", tableData);
 
         } catch (WebClientResponseException e) {

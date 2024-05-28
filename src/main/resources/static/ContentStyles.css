@@ -1,0 +1,31 @@
+.body {
+    background-color: #191C1C;
+}
+.btn-custom {
+    background-color: #004F4F;
+    color: #00DDDD;
+    border-color: #004F4F;
+}
+.btn-custom:hover {
+    background-color: #00DDDD;
+    color: #004F4F;
+}
+input::placeholder {
+    color: #757575;
+}
+.tbl-rounded {
+    background-color: #3F4948;
+    color: white;
+    border: 1px solid #3F4948;
+    border-radius: 25px;
+    padding: 40px;
+    width: 100%;
+}
+.tbl-content-value {
+    background-color: #191C1C;
+    border: 1px solid #191C1C;
+    border-radius: 25px;
+    color: white;
+    width: 100%;
+    padding-left: 15px;
+}

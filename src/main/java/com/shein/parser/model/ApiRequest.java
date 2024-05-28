@@ -5,7 +5,6 @@ public class ApiRequest {
     private String host;
     private String key;
 
-    // Getters and Setters
     public String getUrl() {
         return url;
     }

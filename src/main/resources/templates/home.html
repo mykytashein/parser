@@ -2,35 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout_navigation :: head"></head>
 <body>
-<style>
-    body {
-        background-color: #191C1C;
-        overflow: hidden;
-        margin: 0;
-    }
-    .content {
-        opacity: 0;
-        transition: opacity 1s ease-in-out;
-    }
-    .content.visible {
-        opacity: 1;
-    }
-    /* Custom styles for the button */
-    .btn-custom {
-        background-color: #191C1C; /* Base background color */
-        color: #00DDDD; /* Base text color */
-        border-color: #004F4F; /* Base border color */
-        padding: 20px;
-        height: 300px;
-    }
-    .btn-custom:hover {
-        background-color: #004F4F; /* Hover background color */
-        color: #00DDDD; /* Hover text color */
-        border-color: #004F4F;
-        padding: 20px;
-        height: 300px;
-    }
-</style>
+<link rel="stylesheet" type="text/css" href="/HomeStyles.css">
+
 <div class="content" id="content">
     <div th:replace="layout_navigation :: nav"></div>
     <div class="container d-flex justify-content-center align-items-center" style="height: 95vh;">

@@ -2,40 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="layout_navigation :: head"></head>
 <body class="body" style="height: 100vh;">
-<style>
-    .body {
-        background-color: #191C1C;
-    }
-    /* Custom styles for the button */
-    .btn-custom {
-        background-color: #004F4F; /* Base background color */
-        color: #00DDDD; /* Base text color */
-        border-color: #004F4F; /* Base border color */
-    }
-    .btn-custom:hover {
-        background-color: #00DDDD; /* Hover background color */
-        color: #004F4F; /* Hover text color */
-    }
-    input::placeholder {
-        color: #757575;
-    }
-    .tbl-rounded {
-        background-color: #3F4948;
-        color: white;
-        border: 1px solid #3F4948;
-        border-radius: 25px;
-        padding: 40px;
-        width: 100%;
-    }
-    .tbl-content-value {
-        background-color: #191C1C;
-        border: 1px solid #191C1C;
-        border-radius: 25px;
-        color: white;
-        width: 100%;
-        padding-left: 15px;
-    }
-</style>
+<link rel="stylesheet" type="text/css" href="/ContentStyles.css">
+
 <div th:replace="layout_navigation :: nav"></div>
 <br>
 <div class="container">
@@ -43,7 +11,6 @@
         <div th:fragment="content" style="max-width: 500px;" class="container text-center">
             <h2 style="color: #00DDDD">JSON/XML TO TABLE</h2>
             <br>
-            <!-- File Upload Form -->
             <div class="container">
                 <form th:action="@{/uploadFile}" method="post" enctype="multipart/form-data" class="row g-2 align-items-center">
                     <div class="col">
@@ -54,24 +21,18 @@
                     </div>
                 </form>
             </div>
-            <!-- Display upload status -->
             <div th:if="${message}">
                 <p th:text="${message}"></p>
             </div>
             <br>
-            <!-- Search Box -->
             <div class="container">
                 <input type="text" id="searchInput" class="form-control mb-3" placeholder="Search for keys..." style="background-color: white;"/>
             </div>
-            <!-- Export Buttons -->
             <div class="container mb-3">
                 <button id="exportJson" class="btn btn-outline-success btn-custom">Export JSON</button>
-                <button id="exportXml" class="btn btn-outline-success btn-custom">Export XML</button>
-                <button id="exportCsv" class="btn btn-outline-success btn-custom">Export CSV</button>
                 <button id="exportXlsx" class="btn btn-outline-success btn-custom">Export XLSX</button>
             </div>
         </div>
-        <!-- Display table data -->
         <div th:if="${tableData != null && !tableData.isEmpty()}" style="max-height: 550px; overflow-y: auto;">
             <div class="tbl-rounded">
                 <div class="table-responsive">
@@ -91,27 +52,9 @@
     </div>
 </div>
 
-<!-- JavaScript for search and export functionality -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const searchInput = document.getElementById('searchInput');
-        const rows = document.querySelectorAll('#data tbody tr');
-
-        searchInput.addEventListener('input', function () {
-            const searchText = searchInput.value.toLowerCase();
-            rows.forEach(row => {
-                let found = false;
-                row.querySelectorAll('td').forEach(cell => {
-                    if (cell.textContent.toLowerCase().includes(searchText)) {
-                        found = true;
-                    }
-                });
-                row.style.display = found ? '' : 'none';
-            });
-        });
-    });
-</script>
+<script src="/ExportFile.js"></script>
 </body>
 </html>

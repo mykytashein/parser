@@ -1,0 +1,18 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(to bottom right, #8a2be2, #000000);
+}
+.container {
+    /*background-color: silver; !* Change as needed *!*/
+    color: white;
+    border: 1px solid #3F4948;
+    border-radius: 25px;
+    padding: 40px;
+    width: 80%; /* Change as needed */
+    max-width: 400px; /* Change as needed */
+}
