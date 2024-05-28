@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout_navigation :: head"></head>
+<body>
+<style>
+    body {
+        background-color: #191C1C;
+        overflow: hidden;
+        margin: 0;
+    }
+    .content {
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+    .content.visible {
+        opacity: 1;
+    }
+    /* Custom styles for the button */
+    .btn-custom {
+        background-color: #191C1C; /* Base background color */
+        color: #00DDDD; /* Base text color */
+        border-color: #004F4F; /* Base border color */
+        padding: 20px;
+        height: 300px;
+    }
+    .btn-custom:hover {
+        background-color: #004F4F; /* Hover background color */
+        color: #00DDDD; /* Hover text color */
+        border-color: #004F4F;
+        padding: 20px;
+        height: 300px;
+    }
+</style>
+<div class="content" id="content">
+    <div th:replace="layout_navigation :: nav"></div>
+    <div class="container d-flex justify-content-center align-items-center" style="height: 95vh;">
+        <div class="row justify-content-center">
+            <div class="col-md-4 text-center">
+                <button id="btn1" class="btn btn-outline-success col-10 mb-2 btn-custom" type="button" onclick="window.location.href='/uploadFile'" >
+                    <span style="font-weight: bold; text-transform: uppercase;">JSON/XML to Table</span>
+                    <br><br>
+                    Convert JSON/XML Data to a Readable Table View for Easy Analysis and Understanding.
+                </button>
+            </div>
+            <div class="col-md-4 text-center">
+                <button id="btn2" class="btn btn-outline-success col-10 mb-2 btn-custom" type="button" onclick="window.location.href='/api'" >
+                    <span style="font-weight: bold; text-transform: uppercase;">Open API to Table</span>
+                    <br><br>
+                    Retrieve and Organize Data from an Open API Endpoint into a Table for Quick and Convenient Exploration.
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const content = document.getElementById('content');
+        setTimeout(() => {
+            content.classList.add('visible');
+        }, 100); // Small delay to ensure transition works
+    });
+</script>
+</body>
+</html>

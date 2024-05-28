@@ -10,10 +10,12 @@
       align-items: center;
       height: 100vh;
       margin: 0;
-      background-color: #f0f0f0;
+      background: linear-gradient(to bottom right, #8a2be2, #000000);
     }
     .container {
-      background-color: white; /* Change as needed */
+      /*background-color: silver; !* Change as needed *!*/
+      color: white;
+      border: 1px solid #3F4948;
       border-radius: 25px;
       padding: 40px;
       width: 80%; /* Change as needed */
@@ -26,15 +28,43 @@
 <div class="container">
 <h1>Sign Up</h1>
 
-<form th:action="@{/signup}" method="post">
-  <label for="username" class="form-label">Username:</label><br>
-  <input type="text" class="form-control"  id="username" name="username" required><br>
-  <label for="password" class="form-label">Password:</label><br>
-  <input type="password" class="form-control"  id="password" name="password" required><br>
-  <div class="d-grid gap-2">
-    <input type="submit" class="btn btn-outline-success" value="Sign Up">
-  </div>
-</form>
+  <form th:action="@{/signup}" method="post" onsubmit="return validatePassword()">
+    <!-- Username input field -->
+    <label for="username" class="form-label">Username:</label><br>
+    <input type="text" class="form-control" id="username" name="username" required><br>
+
+    <!-- Password input field -->
+    <label for="password" class="form-label">Password:</label><br>
+    <input type="password" class="form-control" id="password" name="password" required><br>
+
+    <!-- Password confirmation input field -->
+    <label for="confirmPassword" class="form-label">Confirm Password:</label><br>
+    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required><br>
+
+    <!-- Submit button -->
+    <div class="d-grid gap-2">
+      <input type="submit" class="btn btn-outline-success" value="Sign Up">
+    </div>
+  </form>
+  <br>
+  <form th:action="@{/login}" method="get">
+    <div class="d-grid gap-2">
+      <input type="submit" class="btn btn-outline-success" value="Back to Sign in">
+    </div>
+  </form>
 </div>
 </body>
 </html>
+
+<script>
+  function validatePassword() {
+    var password = document.getElementById("password").value;
+    var confirmPassword = document.getElementById("confirmPassword").value;
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return false;
+    }
+    return true;
+  }
+</script>

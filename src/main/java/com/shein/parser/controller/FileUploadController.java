@@ -44,7 +44,8 @@ public class FileUploadController {
                 List<List<String>> tableData = new ArrayList<>();
                 for (Map.Entry<String, Object> entry : flatJsonMap.entrySet()) {
                     List<String> row = new ArrayList<>(Arrays.asList(entry.getKey().split("\\.")));
-                    row.add(entry.getValue().toString());
+                    String value = entry.getValue() != null ? entry.getValue().toString() : ""; // Handle null value
+                    row.add(value);
                     tableData.add(row);
                 }
 

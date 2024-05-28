@@ -1,28 +1,111 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="layout_navigation :: head"></head>
-<body>
+<body class="body" style="height: 100vh;">
+<style>
+  .body {
+    background-color: #191C1C;
+    color: white;
+  }
+  /* Custom styles for the button */
+  .btn-custom {
+    background-color: #004F4F; /* Base background color */
+    color: #00DDDD; /* Base text color */
+    border-color: #004F4F; /* Base border color */
+  }
+  .btn-custom:hover {
+    background-color: #00DDDD; /* Hover background color */
+    color: #004F4F; /* Hover text color */
+  }
+  input::placeholder {
+    color: #757575;
+  }
+  .tbl-rounded {
+    background-color: #3F4948;
+    color: white;
+    border: 1px solid #3F4948;
+    border-radius: 25px;
+    padding: 40px;
+    width: 100%;
+  }
+  .tbl-content-value {
+    background-color: #191C1C;
+    border: 1px solid #191C1C;
+    border-radius: 25px;
+    color: white;
+    width: 100%;
+    padding-left: 15px;
+  }
+</style>
 <div th:replace="layout_navigation :: nav"></div>
-<h1>API Tester</h1>
-<form action="#" th:action="@{/test-api}" th:object="${apiRequest}" method="post">
-  <div>
-    <label for="url">API URL:</label>
-    <input type="text" id="url" name="url" th:field="*{url}" required />
+<br>
+<div class="container">
+  <div class="row justify-content-center">
+    <div th:fragment="content" style="max-width: 500px;" class="container text-center">
+      <h2 style="color: #00DDDD">OPEN API TO TABLE</h2>
+      <br>
+      <div class="container">
+        <form action="#" th:action="@{/test-api}" th:object="${apiRequest}" method="post" class="row g-2">
+          <div class="col-12">
+            <input type="text" class="form-control" placeholder="API URL ..." id="url" name="url" th:field="*{url}" required />
+          </div>
+          <div class="col-md-6">
+<!--            <label for="host">Host Header (optional):</label>-->
+            <input type="text" class="form-control" placeholder="(Optional) Host Header ..." id="host" name="host" th:field="*{host}" />
+          </div>
+          <div class="col-md-6">
+<!--            <label for="key">API Key Header (optional):</label>-->
+            <input type="text" class="form-control" placeholder="(Optional) API Key Header ..." id="key" name="key" th:field="*{key}" />
+          </div>
+          <br>
+          <button type="submit" class="btn btn-primary btn-custom" >Call API</button>
+        </form>
+      </div>
+      <br>
+      <div class="container mb-3">
+        <button id="exportJson" class="btn btn-outline-success btn-custom">Export JSON</button>
+        <button id="exportXml" class="btn btn-outline-success btn-custom">Export XML</button>
+        <button id="exportCsv" class="btn btn-outline-success btn-custom">Export CSV</button>
+        <button id="exportXlsx" class="btn btn-outline-success btn-custom">Export XLSX</button>
+      </div>
+    </div>
+  <!-- Display table data -->
+    <div th:if="${tableData != null && !tableData.isEmpty()}" style="max-height: 500px; overflow-y: auto;">
+      <div class="tbl-rounded">
+        <div class="table-responsive">
+          <table id="data" class="table">
+            <tbody>
+            <tr th:each="row : ${tableData}">
+              <td th:each="cell, cellStat : ${row}" style="background-color: #3F4948; color: white;">
+                <span th:if="${cellStat.index != row.size() - 1}" th:text="${cell}"></span>
+                <input type="text" th:if="${cellStat.index == row.size() - 1}" th:value="${cell}" class="tbl-content-value"/>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
-  <div>
-    <label for="host">Host Header (optional):</label>
-    <input type="text" id="host" name="host" th:field="*{host}" />
-  </div>
-  <div>
-    <label for="key">API Key Header (optional):</label>
-    <input type="text" id="key" name="key" th:field="*{key}" />
-  </div>
-  <button type="submit">Test API</button>
-</form>
-
-<div th:if="${response}">
-  <h2>API Response</h2>
-  <pre th:text="${response}"></pre>
 </div>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById('searchInput');
+    const rows = document.querySelectorAll('#data tbody tr');
+
+    searchInput.addEventListener('input', function () {
+      const searchText = searchInput.value.toLowerCase();
+      rows.forEach(row => {
+        let found = false;
+        row.querySelectorAll('td').forEach(cell => {
+          if (cell.textContent.toLowerCase().includes(searchText)) {
+            found = true;
+          }
+        });
+        row.style.display = found ? '' : 'none';
+      });
+    });
+  });
+</script>
 </body>
 </html>
