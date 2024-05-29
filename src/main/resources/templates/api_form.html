@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="layout_navigation :: head"></head>
+<body class="body" style="height: 100vh;">
+<link rel="stylesheet" type="text/css" href="/ContentStyles.css">
+<div th:replace="layout_navigation :: nav"></div>
+<br>
+<div class="container">
+  <div class="row justify-content-center">
+    <div th:fragment="content" style="max-width: 500px;" class="container text-center">
+      <h2 style="color: #00DDDD">OPEN API TO TABLE</h2>
+      <br>
+      <div class="container">
+        <form action="#" th:action="@{/test-api}" th:object="${apiRequest}" method="post" class="row g-2">
+          <div class="col-12">
+            <input type="text" class="form-control" placeholder="API URL ..." id="url" name="url" th:field="*{url}" required />
+          </div>
+          <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="(Optional) Host Header ..." id="host" name="host" th:field="*{host}" />
+          </div>
+          <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="(Optional) API Key Header ..." id="key" name="key" th:field="*{key}" />
+          </div>
+          <br>
+          <button type="submit" class="btn btn-primary btn-custom" >Call API</button>
+        </form>
+      </div>
+      <br>
+      <div class="container mb-3">
+        <button id="exportJson" class="btn btn-outline-success btn-custom">Export JSON</button>
+        <button id="exportXlsx" class="btn btn-outline-success btn-custom">Export XLSX</button>
+      </div>
+    </div>
+    <div th:if="${tableData != null && !tableData.isEmpty()}" style="max-height: 500px; overflow-y: auto;">
+      <div class="tbl-rounded">
+        <div class="table-responsive">
+          <table id="data" class="table">
+            <tbody>
+            <tr th:each="row : ${tableData}">
+              <td th:each="cell, cellStat : ${row}" style="background-color: #3F4948; color: white;">
+                <span th:if="${cellStat.index != row.size() - 1}" th:text="${cell}"></span>
+                <input type="text" th:if="${cellStat.index == row.size() - 1}" th:value="${cell}" class="tbl-content-value"/>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+<script src="/ExportFile.js"></script>
+</body>
+</html>
